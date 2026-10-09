@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Asesmen Diagnostik Fisika Kelas X</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2ff;color:#1e293b;min-height:100vh}
+.w{max-width:640px;margin:0 auto;padding:16px}.card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 18px #4f46e51a;margin-bottom:14px}
+.hero{background:linear-gradient(135deg,#4f46e5,#06b6d4);color:#fff;border-radius:20px;padding:28px 20px;text-align:center;margin-bottom:14px}
+.hero h1{margin:6px 0;font-size:22px}.hero p{margin:0;opacity:.9;font-size:14px}.em{font-size:44px}
+label{font-weight:600;font-size:14px;display:block;margin:12px 0 4px}input,select{width:100%;padding:12px;border:2px solid #c7d2fe;border-radius:10px;font-size:16px}
+button{font:inherit;cursor:pointer}.b{background:#4f46e5;color:#fff;border:0;border-radius:12px;padding:14px;font-weight:700;width:100%;font-size:16px;margin-top:10px}
+.b2{background:#fff;color:#4f46e5;border:2px solid #4f46e5}.b:disabled{opacity:.4}
+.o{display:block;width:100%;text-align:left;background:#f8fafc;border:2px solid #e2e8f0;border-radius:12px;padding:13px;margin:8px 0;font-size:16px}
+.o.s{border-color:#4f46e5;background:#eef2ff;font-weight:600}.pg{height:8px;background:#e0e7ff;border-radius:9px;overflow:hidden}.pg i{display:block;height:100%;background:#4f46e5;transition:.3s}
+.chip{display:inline-block;color:#fff;border-radius:99px;padding:3px 12px;font-size:12px;font-weight:700}.row{display:flex;gap:10px}.row>*{flex:1}
+.bar{height:14px;background:#e2e8f0;border-radius:9px;overflow:hidden;margin:4px 0 12px}.bar i{display:block;height:100%}
+.lk{display:flex;gap:6px}.lk button{flex:1;padding:10px 0;border:2px solid #e2e8f0;border-radius:10px;background:#f8fafc;font-weight:700}.lk button.s{background:#4f46e5;color:#fff;border-color:#4f46e5}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border-bottom:1px solid #e2e8f0;padding:6px 4px;text-align:center}th{background:#e0e7ff}td:first-child,th:first-child{text-align:left}.x{overflow-x:auto}
+.st{padding:2px 8px;border-radius:8px;font-weight:700;font-size:12px}.g{background:#dcfce7;color:#166534}.y{background:#fef9c3;color:#854d0e}.r{background:#fee2e2;color:#991b1b}
+small{color:#64748b}a.f{color:#64748b;font-size:12px;display:block;text-align:center;margin-top:18px;cursor:pointer}
+@media print{.np{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ccc}}
+</style></head><body><div class="w" id="app"></div>
+<script>
+const PIN="guru123"; // ganti PIN Mode Guru di sini
+const T=[
+{n:"Vektor",c:"#6366f1",q:`Dua gaya 6 N dan 8 N saling tegak lurus. Besar resultannya ...|2 N|7 N|10 N|14 N|48 N|C
+Kecepatan 20 m/s membentuk sudut 30° terhadap horizontal. Komponen vertikalnya ...|10 m/s|10√2 m/s|10√3 m/s|20 m/s|20√3 m/s|A
+Perahu 4 m/s tegak lurus arus sungai 3 m/s. Kecepatan perahu terhadap tepi sungai ...|1 m/s|7 m/s|12 m/s|5 m/s|3,5 m/s|D`},
+{n:"GLB",c:"#0891b2",q:`Mobil bergerak 90 km/jam selama 20 menit. Jarak tempuhnya ...|1,8 km|18 km|30 km|45 km|1.800 km|C
+Grafik v–t untuk GLB berbentuk ...|garis lurus miring naik|garis lurus miring turun|parabola terbuka ke atas|garis lurus tegak|garis lurus mendatar|E`},
+{n:"GLBB",c:"#d97706",q:`Dari diam, benda dipercepat 2 m/s² selama 5 s. Jarak tempuhnya ...|10 m|25 m|20 m|50 m|100 m|B
+Bola dilempar ke atas. Di titik tertinggi, keadaan bola ...|v = 0 dan a = 0|v maksimum dan a = 0|v = 0 dan a = g ke atas|v = 0 dan a = g ke bawah|v = g dan a = 0|D
+Mobil 20 m/s direm dengan perlambatan 5 m/s². Jarak hingga berhenti ...|4 m|20 m|40 m|30 m|80 m|C`},
+{n:"Gerak Parabola",c:"#db2777",q:`Di titik tertinggi lintasan parabola, kecepatan horizontal bola (tanpa hambatan udara) ...|nol|sama dengan kecepatan horizontal awal|lebih kecil dari kecepatan horizontal awal|maksimum|sama dengan kecepatan vertikal awal|B
+Bola X dijatuhkan bebas, bola Y ditembakkan mendatar dari ketinggian sama pada saat bersamaan. Yang tiba lebih dulu ...|bola X|bola Y|bergantung massa bola|bergantung kecepatan bola Y|keduanya tiba bersamaan|E`}
+].map(t=>({...t,q:t.q.split("\n").map(l=>{const a=l.split("|");return{q:a[0],o:a.slice(1,6),k:"ABCDE".indexOf(a[6])}})}));
+const ALL=T.flatMap((t,i)=>t.q.map((q,j)=>({...q,t:i,j})));
+const NK=["Saya percaya diri belajar fisika.","Saya masih ingat trigonometri dasar (sin, cos, tan).","Saya suka mengaitkan fisika dengan kehidupan sehari-hari.","Saya mudah paham lewat percobaan, simulasi, atau video.","Saya punya HP/laptop dan internet untuk belajar."];
+const $=s=>document.querySelector(s),app=$("#app"),LS=localStorage;
+const ld=(k,d)=>{try{return JSON.parse(LS.getItem(k))||d}catch(e){return d}};
+let S=ld("ad2_s",{step:"home",nama:"",kelas:"",i:0,a:Array(ALL.length).fill(-1),n:Array(NK.length).fill(0),sk:""});
+const sv=()=>LS.setItem("ad2_s",JSON.stringify(S));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const hit=(a)=>T.map((t,ti)=>{let b=0;ALL.forEach((q,i)=>{if(q.t===ti&&a[i]===q.k)b++});return b});
+const kat=p=>p>=70?["Siap","g"]:p>=40?["Siap sebagian","y"]:["Perlu penguatan","r"];
+const go=s=>{S.step=s;sv();render();scrollTo(0,0)};
+function render(){({home,quiz,nk,res,guru})[S.step]()}
+function home(){
+app.innerHTML=`<div class="hero"><div class="em">🚀</div><h1>Asesmen Diagnostik Fisika</h1><p>Kelas X · Gerak Dua Dimensi<br>Vektor, GLB, GLBB, dan Gerak Parabola</p></div>
+<div class="card"><label>Nama lengkap</label><input id="nm" value="${esc(S.nama)}" placeholder="Tulis namamu" autocomplete="off">
+<label>Kelas</label><input id="kl" value="${esc(S.kelas)}" placeholder="Contoh: X-3" autocomplete="off">
+<button class="b" id="go">${S.i>0||S.a.some(x=>x>=0)?"Lanjutkan Asesmen":"Mulai Asesmen"}</button>
+<p><small>📝 ${ALL.length} soal pilihan ganda + ${NK.length} pernyataan angket. Ini bukan nilai rapor, hanya untuk mengetahui kesiapan belajarmu. Kerjakan jujur dan mandiri. Gunakan g = 10 m/s² dan abaikan hambatan udara.</small></p></div>
+<a class="f" id="gr">Mode Guru</a>`;
+const chk=()=>$("#go").disabled=!($("#nm").value.trim()&&$("#kl").value.trim());chk();
+$("#nm").oninput=$("#kl").oninput=chk;
+$("#go").onclick=()=>{S.nama=$("#nm").value.trim();S.kelas=$("#kl").value.trim();go("quiz")};
+$("#gr").onclick=()=>{if(prompt("Masukkan PIN guru")===PIN)go("guru")}}
+function quiz(){
+const q=ALL[S.i],t=T[q.t],n=ALL.length;
+app.innerHTML=`<div class="card"><div class="pg"><i style="width:${S.i/n*100}%"></i></div><p><span class="chip" style="background:${t.c}">${t.n}</span> <small>Soal ${S.i+1} dari ${n}</small></p>
+<h3 style="line-height:1.4">${esc(q.q)}</h3>${q.o.map((o,i)=>`<button class="o ${S.a[S.i]===i?"s":""}" data-i="${i}"><b>${"ABCDE"[i]}.</b> ${esc(o)}</button>`).join("")}
+<div class="row"><button class="b b2" id="pv" ${S.i?"":"disabled"}>← Kembali</button><button class="b" id="nx">${S.i<n-1?"Lanjut →":"Ke angket →"}</button></div></div>`;
+document.querySelectorAll(".o").forEach(b=>b.onclick=()=>{S.a[S.i]=+b.dataset.i;sv();quiz()});
+$("#pv").onclick=()=>{S.i--;sv();quiz()};
+$("#nx").onclick=()=>{if(S.i<n-1){S.i++;sv();quiz();scrollTo(0,0)}else go("nk")}}
+function nk(){
+app.innerHTML=`<div class="card"><h3>Angket Kesiapan Belajar</h3><small>1 = Sangat tidak setuju · 2 = Tidak setuju · 3 = Setuju · 4 = Sangat setuju</small>
+${NK.map((s,i)=>`<p style="margin:16px 0 6px">${i+1}. ${s}</p><div class="lk">${[1,2,3,4].map(v=>`<button data-i="${i}" data-v="${v}" class="${S.n[i]===v?"s":""}">${v}</button>`).join("")}</div>`).join("")}
+<label>Bagian materi yang menurutmu paling sulit (opsional)</label><input id="sk" value="${esc(S.sk)}">
+<div class="row"><button class="b b2" id="pv">← Kembali</button><button class="b" id="fin" ${S.n.every(x=>x)?"":"disabled"}>Selesai & Lihat Hasil</button></div></div>`;
+document.querySelectorAll(".lk button").forEach(b=>b.onclick=()=>{S.sk=$("#sk").value;S.n[+b.dataset.i]=+b.dataset.v;sv();nk()});
+$("#pv").onclick=()=>{S.i=ALL.length-1;go("quiz")};
+$("#fin").onclick=()=>{S.sk=$("#sk").value;S.tgl=new Date().toISOString();const h=ld("ad2_h",[]).filter(r=>!(r.nama===S.nama&&r.kelas===S.kelas));h.push(rec());LS.setItem("ad2_h",JSON.stringify(h));go("res")}}
+const rec=()=>({nama:S.nama,kelas:S.kelas,tgl:S.tgl,a:S.a,n:S.n,sk:S.sk});
+const saran={0:"Ulangi konsep penjumlahan dan penguraian vektor (sin, cos, resultan).",1:"Latih hubungan s = v·t, konversi satuan, dan membaca grafik.",2:"Pelajari percepatan tetap, jatuh bebas, serta rumus v = v₀ + at dan s = v₀t + ½at².",3:"Pahami bahwa gerak horizontal (GLB) dan vertikal (GLBB) berjalan terpisah."};
+function res(){
+const sc=hit(S.a),tot=sc.reduce((a,b)=>a+b,0),pt=Math.round(tot/ALL.length*100);
+app.innerHTML=`<div class="hero"><div class="em">🎉</div><h1>Terima kasih, ${esc(S.nama)}!</h1><p>Kelas ${esc(S.kelas)} · ${new Date(S.tgl||Date.now()).toLocaleDateString("id-ID")}</p></div>
+<div class="card"><h3 style="margin-top:0">Skor total: ${tot}/${ALL.length} (${pt}%)</h3>
+${T.map((t,i)=>{const p=Math.round(sc[i]/T[i].q.length*100),k=kat(p);return`<div><b>${t.n}</b> — ${sc[i]}/${T[i].q.length} <span class="st ${k[1]}">${k[0]}</span><div class="bar"><i style="width:${p}%;background:${t.c}"></i></div>${p<70?`<small>💡 ${saran[i]}</small>`:""}</div>`}).join("")}</div>
+<div class="card"><b>Angket:</b> rata-rata ${(S.n.reduce((a,b)=>a+b,0)/NK.length).toFixed(1)} dari 4<br><small>Hasil ini hanya gambaran awal agar gurumu bisa menyesuaikan pembelajaran.</small></div>
+<div class="card np"><button class="b" id="dl">⬇️ Unduh File Hasil (kirim ke guru)</button><button class="b b2" id="sh" style="display:${navigator.canShare?"block":"none"}">📤 Bagikan ke Guru</button><button class="b b2" id="pr">🖨️ Simpan sebagai PDF / Cetak</button><button class="b b2" id="rs">Ulangi dari awal</button></div>`;
+const fn=`Hasil_${S.nama.replace(/\W+/g,"_")}_${S.kelas.replace(/\W+/g,"")}.json`;
+const file=()=>new File([JSON.stringify(rec())],fn,{type:"application/json"});
+$("#dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(file());a.download=fn;a.click()};
+$("#sh").onclick=()=>navigator.share({files:[file()],title:"Hasil Asesmen Diagnostik"}).catch(()=>{});
+$("#pr").onclick=()=>print();
+$("#rs").onclick=()=>{if(confirm("Hapus jawaban dan mulai ulang?")){S={step:"home",nama:S.nama,kelas:S.kelas,i:0,a:Array(ALL.length).fill(-1),n:Array(NK.length).fill(0),sk:""};go("home")}}}
+function guru(){
+const D=ld("ad2_g",[]).concat(ld("ad2_h",[]).filter(r=>!ld("ad2_g",[]).some(g=>g.nama===r.nama&&g.kelas===r.kelas)));
+const rows=D.map(r=>{const s=hit(r.a),t=s.reduce((a,b)=>a+b,0);return{r,s,t}});
+const avg=i=>rows.length?(rows.reduce((a,x)=>a+x.s[i],0)/rows.length).toFixed(1):"-";
+const hard=ALL.map((q,i)=>({i,p:rows.length?rows.filter(x=>x.r.a[i]===q.k).length/rows.length*100:0})).sort((a,b)=>a.p-b.p).slice(0,5);
+app.innerHTML=`<div class="card"><h3 style="margin-top:0">📊 Rekap Guru</h3><small>Impor file hasil (.json) dari siswa. Data tersimpan di perangkat ini dan bisa dipakai tanpa internet.</small>
+<input type="file" id="fi" accept=".json" multiple><div class="row"><button class="b" id="ex" ${rows.length?"":"disabled"}>⬇️ Unduh Rekap (CSV)</button><button class="b b2" id="cl">Hapus data</button></div><button class="b b2" id="bk">← Halaman depan</button></div>
+<div class="card x"><b>${rows.length} siswa</b><table><tr><th>Nama</th><th>Kls</th>${T.map(t=>`<th>${t.n.split(" ").pop()}</th>`).join("")}<th>%</th><th>Status</th></tr>
+${rows.map(({r,s,t})=>{const p=Math.round(t/ALL.length*100),k=kat(p);return`<tr><td>${esc(r.nama)}</td><td>${esc(r.kelas)}</td>${s.map(v=>`<td>${v}</td>`).join("")}<td>${p}</td><td><span class="st ${k[1]}">${k[0]}</span></td></tr>`}).join("")}
+<tr><th>Rata-rata</th><th></th>${T.map((_,i)=>`<th>${avg(i)}</th>`).join("")}<th></th><th></th></tr></table><small>Skor maks: ${T.map(t=>t.n+" "+t.q.length).join(", ")}</small></div>
+${rows.length?`<div class="card"><b>Soal paling banyak salah (maks. 5)</b><br><small>${hard.map(h=>`${T[ALL[h.i].t].n} no.${ALL[h.i].j+1} (${Math.round(h.p)}% benar)`).join("<br>")}</small><p><b>Rata-rata angket:</b><br><small>${NK.map((s,i)=>`${s} <b>${(rows.reduce((a,x)=>a+x.r.n[i],0)/rows.length).toFixed(1)}</b>`).join("<br>")}</small></p></div>`:""}`;
+$("#bk").onclick=()=>go("home");
+$("#cl").onclick=()=>{if(confirm("Hapus semua data rekap di perangkat ini?")){LS.removeItem("ad2_g");LS.removeItem("ad2_h");guru()}};
+$("#fi").onchange=async e=>{const g=ld("ad2_g",[]);for(const f of e.target.files){try{const r=JSON.parse(await f.text());if(!r.nama||!r.a)continue;const i=g.findIndex(x=>x.nama===r.nama&&x.kelas===r.kelas);i<0?g.push(r):g[i]=r}catch(x){}}LS.setItem("ad2_g",JSON.stringify(g));guru()};
+$("#ex").onclick=()=>{const L=[["Nama","Kelas",...T.map(t=>t.n),"Total","Persen","Status",...NK.map((_,i)=>"Angket"+(i+1)),"Materi tersulit"]];
+rows.forEach(({r,s,t})=>{const p=Math.round(t/ALL.length*100);L.push([r.nama,r.kelas,...s,t,p,kat(p)[0],...r.n,r.sk||""])});
+const c="\ufeff"+L.map(l=>l.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c],{type:"text/csv"}));a.download="Rekap_Asesmen_Diagnostik.csv";a.click()}}
+render();
+</script></body></html>
